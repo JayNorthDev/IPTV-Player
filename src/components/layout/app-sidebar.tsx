@@ -12,6 +12,7 @@ import {
 import { GtnLogo } from '@/components/gtn-logo';
 import { usePathname } from 'next/navigation';
 import { Button } from '../ui/button';
+import { SidebarSeparator } from '../ui/sidebar';
 
 export function AppSidebar() {
   const pathname = usePathname();
@@ -26,28 +27,13 @@ export function AppSidebar() {
           </Link>
         </Button>
       </SidebarHeader>
+      <SidebarSeparator className="mx-2 w-auto" />
       <SidebarContent>
         <SidebarMenu>
-          <SidebarMenuItem>
-            <SidebarMenuButton asChild isActive={pathname === '/'} tooltip="Home">
-              <Link href="/">
-                <Home />
-                <span className="group-data-[collapsible=icon]:hidden">Home</span>
-              </Link>
-            </SidebarMenuButton>
-          </SidebarMenuItem>
           <SidebarMenuItem>
             <SidebarMenuButton tooltip="Search">
               <Search />
               <span className="group-data-[collapsible=icon]:hidden">Search</span>
-            </SidebarMenuButton>
-          </SidebarMenuItem>
-          <SidebarMenuItem>
-            <SidebarMenuButton asChild isActive={pathname === '/player'} tooltip="Player">
-              <Link href="/player">
-                <Play />
-                <span className="group-data-[collapsible=icon]:hidden">Player</span>
-              </Link>
             </SidebarMenuButton>
           </SidebarMenuItem>
         </SidebarMenu>
