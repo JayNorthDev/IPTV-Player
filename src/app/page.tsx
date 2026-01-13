@@ -219,9 +219,7 @@ export default function Home() {
                     </div>
                 )}
                  {!selectedChannel && (
-                    <div>
-                        <h2 className="font-semibold text-lg">Welcome</h2>
-                    </div>
+                    <div />
                 )}
             </div>
             <div />
