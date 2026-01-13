@@ -8,7 +8,6 @@ import {
   SidebarMenu,
   SidebarMenuItem,
   SidebarMenuButton,
-  SidebarSeparator,
 } from '@/components/ui/sidebar';
 import { GtnLogo } from '@/components/gtn-logo';
 import { usePathname } from 'next/navigation';
@@ -19,7 +18,7 @@ export function AppSidebar() {
 
   return (
     <Sidebar>
-      <SidebarHeader className="flex h-16 items-center px-4">
+      <SidebarHeader className="flex h-16 items-center border-b px-4">
         <Button variant="ghost" className="h-auto p-0 hover:bg-transparent" asChild>
           <Link href="/" className="flex items-center gap-2">
             <GtnLogo className="w-8 h-8 text-accent" />
@@ -27,7 +26,6 @@ export function AppSidebar() {
           </Link>
         </Button>
       </SidebarHeader>
-      <SidebarSeparator />
       <SidebarContent>
         <SidebarMenu>
           <SidebarMenuItem>
