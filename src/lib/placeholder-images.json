@@ -1,3 +1,58 @@
 {
-  "placeholderImages": []
+  "placeholderImages": [
+    {
+      "id": "hero-pier",
+      "description": "A moody pier over the ocean at night.",
+      "imageUrl": "https://images.unsplash.com/photo-1675627385278-853a531e79ce?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxMHx8b2NlYW4lMjBwaWVyfGVufDB8fHx8MTc2ODMwMjUzMXww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "ocean pier"
+    },
+    {
+      "id": "space-station",
+      "description": "View of earth from the ISS.",
+      "imageUrl": "https://images.unsplash.com/photo-1663427929917-333d88949f7a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw0fHxlYXJ0aCUyMHNwYWNlfGVufDB8fHx8MTc2ODIxODc1N3ww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "earth space"
+    },
+    {
+      "id": "lofi-girl",
+      "description": "Anime girl studying at her desk.",
+      "imageUrl": "https://images.unsplash.com/photo-1767800766055-1cdbd2e351b9?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw1fHxhbmltZSUyMGRlc2t8ZW58MHx8fHwxNzY4MzAyNTMxfDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "anime desk"
+    },
+    {
+      "id": "news-desk",
+      "description": "A modern news studio desk.",
+      "imageUrl": "https://images.unsplash.com/photo-1742805382153-bb4be26d6031?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxuZXdzJTIwc3R1ZGlvfGVufDB8fHx8MTc2ODI4ODg3OXww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "news studio"
+    },
+    {
+      "id": "nature-stream",
+      "description": "A beautiful mountain stream in a forest.",
+      "imageUrl": "https://images.unsplash.com/photo-1512036594830-51cea3a8df78?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw4fHxtb3VudGFpbiUyMHN0cmVhbXxlbnwwfHx8fDE3NjgzMDI1MzF8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "mountain stream"
+    },
+    {
+      "id": "retro-tv",
+      "description": "An old television set with static.",
+      "imageUrl": "https://images.unsplash.com/photo-1766941234615-644690cad4e2?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw2fHxyZXRybyUyMHRlbGV2aXNpb258ZW58MHx8fHwxNzY4MzAyNTMxfDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "retro television"
+    },
+    {
+      "id": "kitchen-prep",
+      "description": "Ingredients being prepped on a kitchen counter.",
+      "imageUrl": "https://images.unsplash.com/photo-1514986888952-8cd320577b68?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwyfHxraXRjaGVuJTIwZm9vZHxlbnwwfHx8fDE3NjgyMDkwOTZ8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "kitchen food"
+    },
+    {
+      "id": "city-drive",
+      "description": "View from a car driving through a city at night.",
+      "imageUrl": "https://images.unsplash.com/photo-1505811210036-052144988918?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw0fHxjaXR5JTIwbmlnaHR8ZW58MHx8fHwxNzY4MjUzODI5fDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "city night"
+    },
+    {
+      "id": "puppies",
+      "description": "A group of cute puppies playing.",
+      "imageUrl": "https://images.unsplash.com/photo-1619980296991-5c0d64b23950?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw2fHxjdXRlJTIwcHVwcGllc3xlbnwwfHx8fDE3NjgzMDI1MzF8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "cute puppies"
+    }
+  ]
 }
