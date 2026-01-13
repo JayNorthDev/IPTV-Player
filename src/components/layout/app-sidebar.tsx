@@ -1,6 +1,6 @@
 'use client';
 import Link from 'next/link';
-import { Home, Search } from 'lucide-react';
+import { Home, Search, Play } from 'lucide-react';
 import {
   Sidebar,
   SidebarHeader,
@@ -40,6 +40,14 @@ export function AppSidebar() {
             <SidebarMenuButton tooltip="Search">
               <Search />
               <span className="group-data-[collapsible=icon]:hidden">Search</span>
+            </SidebarMenuButton>
+          </SidebarMenuItem>
+          <SidebarMenuItem>
+            <SidebarMenuButton asChild isActive={pathname === '/player'} tooltip="Player">
+              <Link href="/player">
+                <Play />
+                <span className="group-data-[collapsible=icon]:hidden">Player</span>
+              </Link>
             </SidebarMenuButton>
           </SidebarMenuItem>
         </SidebarMenu>
