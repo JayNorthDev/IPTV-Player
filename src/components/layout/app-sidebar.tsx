@@ -8,6 +8,7 @@ import {
   SidebarMenu,
   SidebarMenuItem,
   SidebarMenuButton,
+  SidebarSeparator,
 } from '@/components/ui/sidebar';
 import { GtnLogo } from '@/components/gtn-logo';
 import { usePathname } from 'next/navigation';
@@ -26,6 +27,7 @@ export function AppSidebar() {
           </Link>
         </Button>
       </SidebarHeader>
+      <SidebarSeparator />
       <SidebarContent>
         <SidebarMenu>
           <SidebarMenuItem>
