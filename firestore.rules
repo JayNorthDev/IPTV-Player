@@ -3,13 +3,13 @@ rules_version = '2';
 
 service cloud.firestore {
   match /databases/{database}/documents {
-    // Allow public read access to settings
+    // Allow public read access to settings for playlist URL
     match /settings/{settingId} {
       allow read: if true;
-      allow write: if false; // Nobody can write
+      allow write: if false; // Disallow writes to prevent modification
     }
 
-    // Deny all other access
+    // Deny all other access by default
     match /{document=**} {
       allow read, write: if false;
     }
