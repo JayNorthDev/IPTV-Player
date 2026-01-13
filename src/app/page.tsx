@@ -214,13 +214,12 @@ export default function Home() {
                 <Menu/>
             </button>
             <div className="flex items-center gap-4">
-                {selectedChannel && (
+                {selectedChannel ? (
                     <div>
                         <h2 className="font-semibold text-lg">{selectedChannel.name}</h2>
                         <p className="text-sm text-muted-foreground">{selectedChannel.group.title}</p>
                     </div>
-                )}
-                 {!selectedChannel && (
+                ) : (
                     <div />
                 )}
             </div>
@@ -240,18 +239,6 @@ export default function Home() {
               <p>Choose from the list on the left</p>
             </div>
           )}
-           {!selectedChannel && (
-                <div className="flex flex-col items-center justify-center h-full text-muted-foreground bg-black">
-                  <MonitorPlay className="w-24 h-24 mb-4" />
-                  <h2 className="text-2xl font-semibold">Select a channel to start watching</h2>
-                  <p>Choose from the list on the left</p>
-                </div>
-            )}
-             {selectedChannel && (
-                <div data-vjs-player className="w-full h-full">
-                    <video ref={videoRef} className="video-js vjs-big-play-centered w-full h-full" />
-                </div>
-            )}
         </main>
       </div>
     </div>
