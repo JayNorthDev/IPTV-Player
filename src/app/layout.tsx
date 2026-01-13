@@ -2,17 +2,21 @@ import type { Metadata } from 'next';
 import './globals.css';
 import { Toaster } from "@/components/ui/toaster";
 import { AppLayout } from '@/components/layout/app-layout';
+import { cookies } from 'next/headers';
 
 export const metadata: Metadata = {
   title: 'GTNPlay',
   description: 'Unlock a World of Entertainment',
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const cookieStore = await cookies();
+  const defaultOpen = cookieStore.get("sidebar:state")?.value === "true";
+
   return (
     <html lang="en" className="dark">
       <head>
@@ -21,7 +25,7 @@ export default function RootLayout({
         <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=PT+Sans:wght@400;700&display=swap" rel="stylesheet" />
       </head>
       <body className="font-body antialiased">
-        <AppLayout>
+        <AppLayout defaultOpen={defaultOpen}>
           {children}
         </AppLayout>
         <Toaster />
