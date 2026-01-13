@@ -19,7 +19,7 @@ export function AppSidebar() {
 
   return (
     <Sidebar>
-      <SidebarHeader>
+      <SidebarHeader className="flex h-16 items-center px-4">
         <Button variant="ghost" className="h-auto p-0 hover:bg-transparent" asChild>
           <Link href="/" className="flex items-center gap-2">
             <GtnLogo className="w-8 h-8 text-accent" />
