@@ -46,8 +46,8 @@ export default function Home() {
   const [categories, setCategories] = useState<string[]>(["All"]);
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
   
-  const videoNode = useRef<HTMLVideoElement>(null);
-  const player = useRef<any>(null);
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const playerRef = useRef<any>(null);
   const { firestore } = getFirebase();
 
   useEffect(() => {
@@ -89,33 +89,35 @@ export default function Home() {
   }, [firestore]);
 
   useEffect(() => {
-    const videoElement = videoNode.current;
-    if (videoElement && !player.current) {
-      player.current = videojs(videoElement, {
+    // Make sure Video.js player is only initialized once
+    if (!playerRef.current && videoRef.current) {
+      const videoElement = videoRef.current;
+      playerRef.current = videojs(videoElement, {
         autoplay: true,
         controls: true,
         fluid: true,
         liveui: true,
       });
     }
+    
+    // Update player source when selectedChannel changes
+    if (playerRef.current && selectedChannel) {
+        playerRef.current.src({
+            src: selectedChannel.url,
+            type: selectedChannel.http?.['content-type'] || 'application/x-mpegURL',
+        });
+        playerRef.current.play();
+    }
 
+    // Dispose the player on component unmount
     return () => {
-      if (player.current) {
-        player.current.dispose();
-        player.current = null;
+      if (playerRef.current) {
+        // playerRef.current.dispose();
+        // playerRef.current = null;
       }
     };
-  }, []);
-
-  useEffect(() => {
-    if (selectedChannel && player.current) {
-      player.current.src({
-        src: selectedChannel.url,
-        type: selectedChannel.http?.['content-type'] || 'application/x-mpegURL',
-      });
-      player.current.play();
-    }
   }, [selectedChannel]);
+
 
   useEffect(() => {
     let channels = allChannels;
@@ -229,7 +231,7 @@ export default function Home() {
         <main className="flex-1 flex flex-col bg-black">
           {selectedChannel ? (
             <div data-vjs-player className="w-full h-full">
-              <video ref={videoNode} className="video-js vjs-big-play-centered w-full h-full" />
+              <video ref={videoRef} className="video-js vjs-big-play-centered w-full h-full" />
             </div>
           ) : (
             <div className="flex flex-col items-center justify-center h-full text-muted-foreground bg-black">
@@ -238,6 +240,18 @@ export default function Home() {
               <p>Choose from the list on the left</p>
             </div>
           )}
+           {!selectedChannel && (
+                <div className="flex flex-col items-center justify-center h-full text-muted-foreground bg-black">
+                  <MonitorPlay className="w-24 h-24 mb-4" />
+                  <h2 className="text-2xl font-semibold">Select a channel to start watching</h2>
+                  <p>Choose from the list on the left</p>
+                </div>
+            )}
+             {selectedChannel && (
+                <div data-vjs-player className="w-full h-full">
+                    <video ref={videoRef} className="video-js vjs-big-play-centered w-full h-full" />
+                </div>
+            )}
         </main>
       </div>
     </div>
