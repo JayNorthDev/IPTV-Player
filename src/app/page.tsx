@@ -146,7 +146,7 @@ export default function Home() {
         <div className="flex items-center justify-between p-4 h-16 border-b border-sidebar-border shrink-0">
           <div className={`flex items-center gap-2 ${!isSidebarOpen && 'md:hidden'}`}>
             <Tv className="w-8 h-8 text-primary" />
-            <h1 className="text-xl font-bold">IPTV Player</h1>
+            <h1 className="text-xl font-bold">GTNPlay</h1>
           </div>
           <button onClick={() => setIsSidebarOpen(!isSidebarOpen)} className="p-2 rounded-full hover:bg-sidebar-accent md:hidden">
             {isSidebarOpen ? <X/> : <Menu/>}
