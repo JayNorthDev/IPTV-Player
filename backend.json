@@ -1,0 +1,27 @@
+
+{
+  "entities": {
+    "playlist": {
+      "title": "Playlist",
+      "description": "A document containing the URL for the IPTV playlist.",
+      "type": "object",
+      "properties": {
+        "url": {
+          "type": "string",
+          "format": "uri",
+          "description": "The URL of the M3U playlist file."
+        }
+      },
+      "required": ["url"]
+    }
+  },
+  "auth": {
+    "providers": []
+  },
+  "firestore": {
+    "/settings/{settingId}": {
+      "schema": { "$ref": "#/entities/playlist" },
+      "description": "Global application settings."
+    }
+  }
+}
