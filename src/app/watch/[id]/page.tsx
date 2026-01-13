@@ -20,12 +20,12 @@ export default function WatchPage({ params }: WatchPageProps) {
   return (
     <div className="max-w-7xl mx-auto">
       <div className="mb-6">
-        <Link href="/" legacyBehavior passHref>
-          <Button variant="ghost" className="text-muted-foreground hover:text-foreground">
+        <Button variant="ghost" className="text-muted-foreground hover:text-foreground" asChild>
+          <Link href="/">
             <ArrowLeft className="mr-2 h-4 w-4" />
             Back to Channels
-          </Button>
-        </Link>
+          </Link>
+        </Button>
       </div>
 
       <div className="aspect-video w-full rounded-lg overflow-hidden shadow-2xl shadow-black/50 bg-black mb-6">

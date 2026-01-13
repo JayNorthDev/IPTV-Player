@@ -29,12 +29,12 @@ export function AppSidebar() {
       <SidebarContent>
         <SidebarMenu>
           <SidebarMenuItem>
-            <Link href="/" legacyBehavior passHref>
-              <SidebarMenuButton isActive={pathname === '/'} tooltip="Home">
+            <SidebarMenuButton asChild isActive={pathname === '/'} tooltip="Home">
+              <Link href="/">
                 <Home />
                 <span className="group-data-[collapsible=icon]:hidden">Home</span>
-              </SidebarMenuButton>
-            </Link>
+              </Link>
+            </SidebarMenuButton>
           </SidebarMenuItem>
           <SidebarMenuItem>
             <SidebarMenuButton tooltip="Search">
