@@ -208,7 +208,7 @@ export default function Home() {
       <div className="flex flex-col flex-1 overflow-hidden">
         {/* Header */}
         <header className="flex items-center justify-between h-16 px-6 bg-[#1a1a1a] border-b border-gray-700 shrink-0">
-            <button onClick={() => setIsSidebarOpen(!isSidebarOpen)} className="p-2 rounded-full hover:bg-gray-700 hidden md:block">
+            <button onClick={() => setIsSidebarOpen(!isSidebarOpen)} className="p-2 rounded-full hover:bg-gray-700 block md:hidden">
                 <Menu/>
             </button>
             <div className="flex items-center gap-4">
