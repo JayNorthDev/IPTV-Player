@@ -2,7 +2,7 @@
 import { useState, useEffect, useRef } from 'react';
 import videojs from 'video.js';
 import 'video.js/dist/video-js.css';
-import { Search, Tv, Menu, MonitorPlay, X, Signal } from 'lucide-react';
+import { Search, Tv, Menu, MonitorPlay, X } from 'lucide-react';
 import { getFirebase } from '@/firebase';
 import { doc, getDoc } from 'firebase/firestore';
 
@@ -138,29 +138,29 @@ export default function Home() {
   const categoriesToShow = categories; // Show all categories
 
   return (
-    <div className="flex h-screen bg-[#0f0f0f] text-gray-200 font-sans overflow-hidden">
+    <div className="flex h-screen bg-background text-foreground font-sans overflow-hidden">
       {/* Sidebar / Channel & Category List */}
-      <aside className={`absolute md:relative z-20 h-full bg-[#1a1a1a] transition-all duration-300 ease-in-out ${isSidebarOpen ? 'w-80' : 'w-0 md:w-20'} overflow-hidden flex flex-col`}>
-        <div className="flex items-center justify-between p-4 h-16 border-b border-gray-700 shrink-0">
+      <aside className={`absolute md:relative z-20 h-full bg-sidebar transition-all duration-300 ease-in-out ${isSidebarOpen ? 'w-80' : 'w-0 md:w-20'} overflow-hidden flex flex-col`}>
+        <div className="flex items-center justify-between p-4 h-16 border-b border-sidebar-border shrink-0">
           <div className={`flex items-center gap-2 ${!isSidebarOpen && 'md:hidden'}`}>
-            <Tv className="w-8 h-8 text-red-500" />
+            <Tv className="w-8 h-8 text-primary" />
             <h1 className="text-xl font-bold">IPTV Player</h1>
           </div>
-          <button onClick={() => setIsSidebarOpen(!isSidebarOpen)} className="p-2 rounded-full hover:bg-gray-700 md:hidden">
+          <button onClick={() => setIsSidebarOpen(!isSidebarOpen)} className="p-2 rounded-full hover:bg-sidebar-accent md:hidden">
             {isSidebarOpen ? <X/> : <Menu/>}
           </button>
         </div>
 
         <div className={`p-4 shrink-0 ${!isSidebarOpen && 'md:p-2 md:flex md:justify-center'}`}>
           <div className="relative">
-            <Search className={`absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400 ${!isSidebarOpen && 'md:hidden'}`} />
-             <button className={`p-2 rounded-full hover:bg-gray-700 ${isSidebarOpen && 'md:hidden'} hidden md:block`} onClick={() => isSidebarOpen ? null : setIsSidebarOpen(true)}>
-                <Search className="w-5 h-5 text-gray-400" />
+            <Search className={`absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground ${!isSidebarOpen && 'md:hidden'}`} />
+             <button className={`p-2 rounded-full hover:bg-sidebar-accent ${isSidebarOpen && 'md:hidden'} hidden md:block`} onClick={() => isSidebarOpen ? null : setIsSidebarOpen(true)}>
+                <Search className="w-5 h-5 text-muted-foreground" />
             </button>
             <input
               type="text"
               placeholder="Search channels..."
-              className={`w-full bg-[#2a2a2a] border border-gray-600 rounded-lg pl-10 pr-4 py-2 focus:outline-none focus:ring-2 focus:ring-red-500 ${!isSidebarOpen && 'md:hidden'}`}
+              className={`w-full bg-card border border-input rounded-lg pl-10 pr-4 py-2 focus:outline-none focus:ring-2 focus:ring-primary ${!isSidebarOpen && 'md:hidden'}`}
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
             />
@@ -168,11 +168,11 @@ export default function Home() {
         </div>
 
         <div className={`px-4 pb-2 ${!isSidebarOpen && 'md:hidden'}`}>
-            <p className="text-sm text-gray-400 font-semibold mb-2">Categories</p>
+            <p className="text-sm text-muted-foreground font-semibold mb-2">Categories</p>
             <select 
                 onChange={(e) => setSelectedCategory(e.target.value)} 
                 value={selectedCategory}
-                className="w-full bg-[#2a2a2a] border border-gray-600 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-red-500"
+                className="w-full bg-card border border-input rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary"
             >
                 {categoriesToShow.map(category => (
                     <option key={category} value={category}>{category}</option>
@@ -186,18 +186,18 @@ export default function Home() {
             <button
                 key={`${channel.url}-${index}`}
                 onClick={() => handleChannelClick(channel)}
-                className={`w-full flex items-center gap-3 p-3 rounded-lg text-left transition-all ${selectedChannel?.url === channel.url ? 'bg-gray-700 shadow-lg' : 'hover:bg-gray-800'}`}
+                className={`w-full flex items-center gap-3 p-3 rounded-lg text-left transition-all ${selectedChannel?.url === channel.url ? 'bg-sidebar-accent shadow-lg' : 'hover:bg-secondary'}`}
             >
                 {channel.tvg.logo && <img src={channel.tvg.logo} alt={channel.name} className="w-10 h-10 object-contain rounded-md bg-black shrink-0" />}
-                {!channel.tvg.logo && <div className="w-10 h-10 flex items-center justify-center bg-gray-800 rounded-md shrink-0"><Tv className="w-5 h-5 text-gray-500"/></div>}
+                {!channel.tvg.logo && <div className="w-10 h-10 flex items-center justify-center bg-card rounded-md shrink-0"><Tv className="w-5 h-5 text-muted-foreground"/></div>}
                 <div className={`flex-1 overflow-hidden ${!isSidebarOpen && 'md:hidden'}`}>
                 <p className="font-semibold truncate">{channel.name}</p>
-                <p className="text-xs text-gray-400 truncate">{channel.group.title || "No Group"}</p>
+                <p className="text-xs text-muted-foreground truncate">{channel.group.title || "No Group"}</p>
                 </div>
             </button>
             ))}
             {displayChannels.length === 0 && searchTerm && (
-            <div className={`text-center py-8 text-gray-500 ${!isSidebarOpen && 'md:hidden'}`}>
+            <div className={`text-center py-8 text-muted-foreground ${!isSidebarOpen && 'md:hidden'}`}>
                 <p>No channels found for "{searchTerm}".</p>
             </div>
             )}
@@ -207,15 +207,15 @@ export default function Home() {
       {/* Main Content */}
       <div className="flex flex-col flex-1 overflow-hidden">
         {/* Header */}
-        <header className="flex items-center justify-between h-16 px-6 bg-[#1a1a1a] border-b border-gray-700 shrink-0">
-            <button onClick={() => setIsSidebarOpen(!isSidebarOpen)} className="p-2 rounded-full hover:bg-gray-700 block md:hidden">
+        <header className="flex items-center justify-between h-16 px-6 bg-card border-b border-border shrink-0">
+            <button onClick={() => setIsSidebarOpen(!isSidebarOpen)} className="p-2 rounded-full hover:bg-secondary block md:hidden">
                 <Menu/>
             </button>
             <div className="flex items-center gap-4">
                 {selectedChannel && (
                     <div>
                         <h2 className="font-semibold text-lg">{selectedChannel.name}</h2>
-                        <p className="text-sm text-gray-400">{selectedChannel.group.title}</p>
+                        <p className="text-sm text-muted-foreground">{selectedChannel.group.title}</p>
                     </div>
                 )}
                  {!selectedChannel && (
@@ -232,7 +232,7 @@ export default function Home() {
               <video ref={videoNode} className="video-js vjs-big-play-centered w-full h-full" />
             </div>
           ) : (
-            <div className="flex flex-col items-center justify-center h-full text-gray-500 bg-black">
+            <div className="flex flex-col items-center justify-center h-full text-muted-foreground bg-black">
               <MonitorPlay className="w-24 h-24 mb-4" />
               <h2 className="text-2xl font-semibold">Select a channel to start watching</h2>
               <p>Choose from the list on the left</p>
