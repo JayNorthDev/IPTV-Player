@@ -24,10 +24,13 @@ export default function VideoPlayer({ channel }: VideoPlayerProps) {
   }, []);
 
   useEffect(() => {
-    // Suppress subtitle warnings
+    // Suppress subtitle and bandwidth warnings
     const originalWarn = videojs.log.warn;
     videojs.log.warn = function (...args: any[]) {
-      if (args[0] && typeof args[0] === 'string' && args[0].includes('Problem encountered loading the subtitle track')) {
+      if (
+        (args[0] && typeof args[0] === 'string' && args[0].includes('Problem encountered loading the subtitle track')) ||
+        (args[0] && typeof args[0] === 'string' && args[0].includes('Aborted early because there isn\'t enough bandwidth'))
+      ) {
         return;
       }
       originalWarn.apply(this, args);
@@ -47,13 +50,18 @@ export default function VideoPlayer({ channel }: VideoPlayerProps) {
 
 
     if (playerRef.current && channel) {
-      playerRef.current.pause();
-      playerRef.current.src({
-        src: channel.url,
-        type: channel.http?.['content-type'] || 'application/x-mpegURL',
-      });
-      playerRef.current.load();
-      playerRef.current.play();
+        playerRef.current.ready(() => {
+            playerRef.current.pause();
+            playerRef.current.src({
+                src: channel.url,
+                type: channel.http?.['content-type'] || 'application/x-mpegURL',
+            });
+            playerRef.current.load();
+            const playPromise = playerRef.current.play();
+            if (playPromise !== undefined) {
+                playPromise.catch(() => { /* Ignore abort errors */ });
+            }
+        });
     }
   }, [channel]);
 
