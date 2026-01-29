@@ -15,6 +15,15 @@ export default function VideoPlayer({ channel }: VideoPlayerProps) {
   const playerRef = useRef<any>(null);
 
   useEffect(() => {
+    return () => {
+        if (playerRef.current) {
+            playerRef.current.dispose();
+            playerRef.current = null;
+        }
+    }
+  }, []);
+
+  useEffect(() => {
     // Suppress subtitle warnings
     const originalWarn = videojs.log.warn;
     videojs.log.warn = function (...args: any[]) {
@@ -24,30 +33,28 @@ export default function VideoPlayer({ channel }: VideoPlayerProps) {
       originalWarn.apply(this, args);
     };
 
-    if (videoRef.current && channel) {
-      if (!playerRef.current) {
-        const videoElement = videoRef.current;
-        playerRef.current = videojs(videoElement, {
-          autoplay: true,
-          controls: true,
-          fluid: true,
-          liveui: true,
-        });
-      }
+    if (videoRef.current) {
+        if (!playerRef.current) {
+          const videoElement = videoRef.current;
+          playerRef.current = videojs(videoElement, {
+            autoplay: true,
+            controls: true,
+            fluid: true,
+            liveui: true,
+          });
+        }
+    }
 
+
+    if (playerRef.current && channel) {
+      playerRef.current.pause();
       playerRef.current.src({
         src: channel.url,
         type: channel.http?.['content-type'] || 'application/x-mpegURL',
       });
+      playerRef.current.load();
       playerRef.current.play();
     }
-
-    return () => {
-      if (playerRef.current) {
-        playerRef.current.dispose();
-        playerRef.current = null;
-      }
-    };
   }, [channel]);
 
   return (
