@@ -89,6 +89,15 @@ export default function Home() {
   }, [firestore]);
 
   useEffect(() => {
+    // Suppress subtitle warnings
+    const originalWarn = videojs.log.warn;
+    videojs.log.warn = function(...args) {
+      if (args[0] && typeof args[0] === 'string' && args[0].includes('Problem encountered loading the subtitle track')) {
+        return;
+      }
+      originalWarn.apply(this, args);
+    };
+
     // Make sure Video.js player is only initialized once
     if (!playerRef.current && videoRef.current) {
       const videoElement = videoRef.current;
@@ -112,8 +121,8 @@ export default function Home() {
     // Dispose the player on component unmount
     return () => {
       if (playerRef.current) {
-        // playerRef.current.dispose();
-        // playerRef.current = null;
+        playerRef.current.dispose();
+        playerRef.current = null;
       }
     };
   }, [selectedChannel]);
