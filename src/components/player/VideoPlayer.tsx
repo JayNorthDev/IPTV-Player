@@ -24,14 +24,22 @@ export default function VideoPlayer({ channel }: VideoPlayerProps) {
       originalWarn.apply(this, args);
     };
 
-    if (!playerRef.current && videoRef.current) {
-      const videoElement = videoRef.current;
-      playerRef.current = videojs(videoElement, {
-        autoplay: true,
-        controls: true,
-        fluid: true,
-        liveui: true,
+    if (videoRef.current && channel) {
+      if (!playerRef.current) {
+        const videoElement = videoRef.current;
+        playerRef.current = videojs(videoElement, {
+          autoplay: true,
+          controls: true,
+          fluid: true,
+          liveui: true,
+        });
+      }
+
+      playerRef.current.src({
+        src: channel.url,
+        type: channel.http?.['content-type'] || 'application/x-mpegURL',
       });
+      playerRef.current.play();
     }
 
     return () => {
@@ -40,16 +48,6 @@ export default function VideoPlayer({ channel }: VideoPlayerProps) {
         playerRef.current = null;
       }
     };
-  }, []);
-
-  useEffect(() => {
-    if (playerRef.current && channel) {
-      playerRef.current.src({
-        src: channel.url,
-        type: channel.http?.['content-type'] || 'application/x-mpegURL',
-      });
-      playerRef.current.play();
-    }
   }, [channel]);
 
   return (
